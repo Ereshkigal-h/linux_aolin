@@ -1,0 +1,18 @@
+ac=./src/add.c
+sc=./src/sub.c
+ao=./src/add.o
+so=./src/sub.o
+inc=./include
+main:./lib/libcal.a
+	gcc $(ac) $(bc) main.c -o $@ -l cal -L ./lib -I $(inc)
+./lib/libcal.a:
+	gcc -c $(ac) -o $(ao) -I $(inc)
+	gcc -c $(bc) -o $(bo) -I $(inc)	
+	ar rcs libcal.a $(ao) $(bo)
+	mv libcal.a ./lib
+.PHONY:clean
+clean:
+	rm $(ao)
+	rm $(bo)
+	rm ./main
+
